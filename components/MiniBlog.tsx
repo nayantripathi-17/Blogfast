@@ -7,7 +7,7 @@ import ArrowCircleRight from "@mui/icons-material/ArrowCircleRight";
 import ShareIcon from "@mui/icons-material/Share";
 import { BlogCardMinimisedProps } from "../types";
 
-export default function MiniBlog({ VERCEL_URL, blog, truncPara, share: sharePost, redirect: redirectToBlog }: BlogCardMinimisedProps) {
+export default function MiniBlog({ DEPLOYED_URL, blog, truncPara, share: sharePost, redirect: redirectToBlog }: BlogCardMinimisedProps) {
 
   
   return (
@@ -56,7 +56,7 @@ export default function MiniBlog({ VERCEL_URL, blog, truncPara, share: sharePost
               aria-label="Open post">
               <a
                 aria-label="Go to Blog"
-                href={`${String(`${VERCEL_URL}/blog/${blog?.blogId}`)}`}
+                href={`${String(`${DEPLOYED_URL}/blog/${blog?.blogId}`)}`}
               >
                 <ArrowCircleRight fontSize="large" />
               </a>

@@ -1,8 +1,8 @@
 import urljoin from "url-join";
 
-const citiesListRender = async (search: string, VERCEL_URL: string, csrfToken: string) => {
+const citiesListRender = async (search: string, DEPLOYED_URL: string, csrfToken: string) => {
   try {
-    const url = urljoin(VERCEL_URL, `api`, `places`, `?search=${search}`);
+    const url = urljoin(DEPLOYED_URL, `api`, `places`, `?search=${search}`);
     const response = await fetch(url, {
       method: "POST",
       headers: {

@@ -11,7 +11,7 @@ const DynamicMiniBlog = dynamic(() => import("./MiniBlog"), {
 })
 
 
-export default function MiniBlogRenderer({ VERCEL_URL, newCityValue }: MainProps & { newCityValue: string }) {
+export default function MiniBlogRenderer({ DEPLOYED_URL, newCityValue }: MainProps & { newCityValue: string }) {
   const [blogArray, setBlogArray] = useState<BlogPartial[]>([]);
   const screenWidthSm = useMediaQuery("(max-width:599px");
   const screenWidthMd = useMediaQuery("(max-width:768px");
@@ -22,21 +22,21 @@ export default function MiniBlogRenderer({ VERCEL_URL, newCityValue }: MainProps
   const sharePost = debounce(useCallback((async (blogId: string | undefined) => {
     try {
       await navigator.share({
-        url: `${VERCEL_URL}/blog/${blogId}`,
+        url: `${DEPLOYED_URL}/blog/${blogId}`,
       })
     } catch (err) {
       console.log(err)
     }
-  }), [VERCEL_URL]),250)
+  }), [DEPLOYED_URL]),250)
 
 
   //Redirect to new blog
   const redirectToBlog = useCallback((event: ClickHandler, blogId: string | undefined) => {
     if (event.type === "click") {
       event.preventDefault();
-      router.push(`${VERCEL_URL}/blog/${blogId}`);
+      router.push(`${DEPLOYED_URL}/blog/${blogId}`);
     }
-  }, [VERCEL_URL, router]);
+  }, [DEPLOYED_URL, router]);
 
   //Truncate para
   const truncPara = (input: string) => {
@@ -51,22 +51,22 @@ export default function MiniBlogRenderer({ VERCEL_URL, newCityValue }: MainProps
 
   //Get logs for city and render them
   useEffect(() => {
-    const setBlogs = async (newCityValue: string, VERCEL_URL: string) => {
+    const setBlogs = async (newCityValue: string, DEPLOYED_URL: string) => {
       if (newCityValue !== "" && newCityValue !== "null" && newCityValue !== "undefined") {
         const getBlogsArray = (await import("../lib/clientSideHelper/clientApiRequest/getBlogsArrayByCity_User")).default
-        const blogsArrayPartial = await getBlogsArray(newCityValue, VERCEL_URL);
+        const blogsArrayPartial = await getBlogsArray(newCityValue, DEPLOYED_URL);
         setBlogArray(blogsArrayPartial);
       }
     }
-    setBlogs(newCityValue, VERCEL_URL);
-  }, [newCityValue, VERCEL_URL])
+    setBlogs(newCityValue, DEPLOYED_URL);
+  }, [newCityValue, DEPLOYED_URL])
 
 
   return (
     <>
       {blogArray.length > 0 && (blogArray.map((blog, index) =>
         <DynamicMiniBlog
-          key={index} VERCEL_URL={VERCEL_URL}
+          key={index} DEPLOYED_URL={DEPLOYED_URL}
           blog={blog} truncPara={truncPara}
           share={sharePost}
           redirect={redirectToBlog} />

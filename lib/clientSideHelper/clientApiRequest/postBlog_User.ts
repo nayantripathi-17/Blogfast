@@ -1,8 +1,8 @@
 import urljoin from "url-join";
 import { PostBlogOptions } from "../../../types";
 
-const postBlog = async (options: FormData, VERCEL_URL: string): Promise<string> => {
-  const url = urljoin(VERCEL_URL, `api`, `submitBlog`);
+const postBlog = async (options: FormData, DEPLOYED_URL: string): Promise<string> => {
+  const url = urljoin(DEPLOYED_URL, `api`, `submitBlog`);
   try {
     const optionsObject: PostBlogOptions = Object.fromEntries(options.entries()) as PostBlogOptions;
     const response = await fetch(url, {

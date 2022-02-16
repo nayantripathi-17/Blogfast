@@ -5,7 +5,7 @@ import { loggedInSettings, pages, loggedOutSettings } from "../lib/clientSideHel
 import { BlogProps } from "../types";
 
 
-export default function BlogComponent({ blog, VERCEL_URL, user, blogId }: BlogProps) {
+export default function BlogComponent({ blog, DEPLOYED_URL, user, blogId }: BlogProps) {
   const { data: session } = useSession();
 
   //User settings according to authentication status
@@ -15,7 +15,7 @@ export default function BlogComponent({ blog, VERCEL_URL, user, blogId }: BlogPr
     <>
       <TopNavbar settings={settings} pages={pages} session={session} />
       <BlogCardExpanded
-        VERCEL_URL={VERCEL_URL}
+        DEPLOYED_URL={DEPLOYED_URL}
         blog={blog}
         user={user}
         blogId={blogId}

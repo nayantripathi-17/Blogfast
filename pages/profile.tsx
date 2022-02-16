@@ -10,7 +10,7 @@ import ProfileComponent from "../components/ProfileComponent";
 import { initDB } from "../lib/firebase/initDB";
 import { BlogComplete, BlogPartial, MainProps, ServerSession, UserFireStoreData } from "../types";
 
-export default function Profile({ VERCEL_URL, blogsArray }: MainProps & { blogsArray: BlogPartial[] }) {
+export default function Profile({ DEPLOYED_URL, blogsArray }: MainProps & { blogsArray: BlogPartial[] }) {
   const theme = useRecoilValue(themeState);
 
   return (
@@ -19,7 +19,7 @@ export default function Profile({ VERCEL_URL, blogsArray }: MainProps & { blogsA
       <Head>
         <title>Profile</title>
       </Head>
-      <ProfileComponent VERCEL_URL={VERCEL_URL} blogsArray={blogsArray} />
+      <ProfileComponent DEPLOYED_URL={DEPLOYED_URL} blogsArray={blogsArray} />
     </ThemeProvider>
 
   );
@@ -28,7 +28,7 @@ export default function Profile({ VERCEL_URL, blogsArray }: MainProps & { blogsA
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
-  const VERCEL_URL = process.env.VERCEL_URL;
+  const DEPLOYED_URL = process.env.DEPLOYED_URL;
   const session = (await getSession(context)) as ServerSession;
   try {
 
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return {
         notFound: true,
         props: {
-          VERCEL_URL,
+          DEPLOYED_URL,
         }
       }
     }
@@ -48,7 +48,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return {
         notFound: true,
         props: {
-          VERCEL_URL,
+          DEPLOYED_URL,
         }
       }
     }
@@ -57,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (blogsPosted === undefined || blogsPosted.length === 0) {
       return {
         props: {
-          VERCEL_URL,
+          DEPLOYED_URL,
           session,
           blogsArray: [],
         }
@@ -83,7 +83,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     return {
       props: {
-        VERCEL_URL,
+        DEPLOYED_URL,
         session,
         blogsArray,
       }
@@ -96,7 +96,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   return {
     notFound: true,
     props: {
-      VERCEL_URL,
+      DEPLOYED_URL,
       session,
     }
   }

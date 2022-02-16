@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import TextField from "@mui/material/TextField";
 import { SearchbarProps } from "../types";
 
-function Searchbar({ VERCEL_URL, value, setValue, selectClick }:SearchbarProps) {
+function Searchbar({ DEPLOYED_URL, value, setValue, selectClick }:SearchbarProps) {
   const [inputValue, setInputValue] = useState("");
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
   const [isFirstTimeFocused, setIsFirstTimeFocused] = useState<boolean>(false);
@@ -27,7 +27,7 @@ function Searchbar({ VERCEL_URL, value, setValue, selectClick }:SearchbarProps) 
     if (!isFirstTimeFocused) {
       setIsLoading(true);
       setIsFirstTimeFocused(true);  
-      const arrayCities = await (await import("../lib/clientSideHelper/clientApiRequest/getCitiesUser_User")).getCities(VERCEL_URL)
+      const arrayCities = await (await import("../lib/clientSideHelper/clientApiRequest/getCitiesUser_User")).getCities(DEPLOYED_URL)
       setCities(arrayCities);
       setIsLoading(false);
     }

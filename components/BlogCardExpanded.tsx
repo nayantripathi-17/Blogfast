@@ -9,18 +9,18 @@ import { BlogProps } from "../types";
 import { useCallback } from "react";
 import debounce from "lodash/debounce"
 
-export default function BlogCardExpanded({ blog, VERCEL_URL, user, blogId }: BlogProps) {
+export default function BlogCardExpanded({ blog, DEPLOYED_URL, user, blogId }: BlogProps) {
 
 
   const sharePost = debounce(useCallback((async () => {
     try {
       await navigator.share({
-        url: `${VERCEL_URL}/blog/${blogId}`,
+        url: `${DEPLOYED_URL}/blog/${blogId}`,
       })
     } catch (err) {
       console.log(err)
     }
-  }), [VERCEL_URL, blogId]),250)
+  }), [DEPLOYED_URL, blogId]),250)
 
   return (
     <article aria-label="Blog Post" className="flex flex-grow justify-center items-center mt-10">

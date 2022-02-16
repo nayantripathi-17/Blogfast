@@ -23,7 +23,7 @@ export default function Login() {
 export async function getStaticProps() {
   return {
     props: {
-      VERCEL_URL: process.env.VERCEL_URL,
+      DEPLOYED_URL: process.env.DEPLOYED_URL,
     },
   };
 }

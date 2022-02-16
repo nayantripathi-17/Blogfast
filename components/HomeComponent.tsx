@@ -8,7 +8,7 @@ import { MainProps } from "../types";
 
 
 //Component
-function HomeComponent({ VERCEL_URL }: MainProps) {
+function HomeComponent({ DEPLOYED_URL }: MainProps) {
 
   const { data: session } = useSession();
   const [value, setValue] = useState<string>("");
@@ -29,8 +29,8 @@ function HomeComponent({ VERCEL_URL }: MainProps) {
   return (
     <>
       <TopNavbar settings={settings} pages={pages} session={session} />
-      <Searchbar VERCEL_URL={VERCEL_URL} value={value} setValue={setValue} selectClick={selectCityClick} />
-      <MiniBlogRenderer VERCEL_URL={VERCEL_URL} newCityValue={String(searchValue)} />
+      <Searchbar DEPLOYED_URL={DEPLOYED_URL} value={value} setValue={setValue} selectClick={selectCityClick} />
+      <MiniBlogRenderer DEPLOYED_URL={DEPLOYED_URL} newCityValue={String(searchValue)} />
     </>
   );
 }

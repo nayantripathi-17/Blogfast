@@ -6,7 +6,7 @@ import { getUser } from "../../../lib/firebase/getUser";
 import { UserObject } from "../../../types";
 
 const {
-  VERCEL_URL,
+  DEPLOYED_URL,
   CLIENT_ID_GOOGLE_OAUTH,
   CLIENT_SECRET_GOOGLE_OAUTH,
   JWT_SECRET,
@@ -22,7 +22,7 @@ export default NextAuth({
         params: {
           scope: "openid email profile",
           redirect_uri: urljoin(
-            String(VERCEL_URL),
+            String(DEPLOYED_URL),
             `api`,
             `auth`,
             `callback`,

@@ -9,7 +9,7 @@ import { getBlog } from "../../lib/firebase/getBlog";
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { BlogProps, ParamsBlogId } from "../../types";
 
-export default function BlogPage({ VERCEL_URL, blog, user, blogId }: BlogProps) {
+export default function BlogPage({ DEPLOYED_URL, blog, user, blogId }: BlogProps) {
   const theme = useRecoilValue(themeState);
 
   return (
@@ -21,7 +21,7 @@ export default function BlogPage({ VERCEL_URL, blog, user, blogId }: BlogProps) 
       <BlogComponent
         blog={blog}
         user={user}
-        VERCEL_URL={VERCEL_URL}
+        DEPLOYED_URL={DEPLOYED_URL}
         blogId={blogId}
       />
     </ThemeProvider>
@@ -37,13 +37,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context: GetStaticPropsContext) => {
   try {
-    const VERCEL_URL = process.env.VERCEL_URL;
+    const DEPLOYED_URL = process.env.DEPLOYED_URL;
     const params = context.params;
     if (params === undefined) {
       return {
         notFound: true,
         props: {
-          VERCEL_URL,
+          DEPLOYED_URL,
         },
       };
     }
@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
       return {
         notFound: true,
         props: {
-          VERCEL_URL,
+          DEPLOYED_URL,
         },
       };
     }
@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
       return {
         notFound: true,
         props: {
-          VERCEL_URL,
+          DEPLOYED_URL,
         },
       };
     }
@@ -73,7 +73,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     //Returned If User Exists
     return {
       props: {
-        VERCEL_URL: VERCEL_URL,
+        DEPLOYED_URL: DEPLOYED_URL,
         blogId: blogId,
         blog: {
           city: blog?.city,

@@ -15,7 +15,7 @@ const DynamicMiniBlog = dynamic(() => import("./MiniBlog"), {
 });
 
 
-export default function ProfileComponent({ VERCEL_URL, blogsArray }: MainProps & { blogsArray: BlogPartial[] }) {
+export default function ProfileComponent({ DEPLOYED_URL, blogsArray }: MainProps & { blogsArray: BlogPartial[] }) {
 
     const router = useRouter();
     const screenWidthSm = useMediaQuery("(max-width:599px");
@@ -25,20 +25,20 @@ export default function ProfileComponent({ VERCEL_URL, blogsArray }: MainProps &
     const sharePost = debounce(useCallback((async (blogId: string | undefined) => {
         try {
             await navigator.share({
-                url: `${VERCEL_URL}/blog/${blogId}`,
+                url: `${DEPLOYED_URL}/blog/${blogId}`,
             })
         } catch (err) {
             console.log(err)
         }
-    }), [VERCEL_URL]),250)
+    }), [DEPLOYED_URL]),250)
 
     //Redirect to new blog
     const redirectToBlog = useCallback((event: ClickHandler, blogId: string | undefined) => {
         if (event.type === "click") {
             event.preventDefault();
-            router.push(`${VERCEL_URL}/blog/${blogId}`);
+            router.push(`${DEPLOYED_URL}/blog/${blogId}`);
         }
-    }, [VERCEL_URL, router])
+    }, [DEPLOYED_URL, router])
 
     //Truncate para
     const truncPara = (input: string) => {
@@ -60,7 +60,7 @@ export default function ProfileComponent({ VERCEL_URL, blogsArray }: MainProps &
                 <ProfileCenter session={session} />
                 {blogsArray.length > 0 && (blogsArray.map((blog, index) =>
                     <DynamicMiniBlog
-                        key={index} VERCEL_URL={VERCEL_URL}
+                        key={index} DEPLOYED_URL={DEPLOYED_URL}
                         blog={blog} truncPara={truncPara}
                         share={sharePost}
                         redirect={redirectToBlog} />

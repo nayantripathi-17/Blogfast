@@ -6,7 +6,7 @@ import Head from "next/head";
 import ComposeComponent from "../components/ComposeComponent";
 import { GetStaticProps } from "next";
 
-export default function Compose({ VERCEL_URL }: { VERCEL_URL: string }) {
+export default function Compose({ DEPLOYED_URL }: { DEPLOYED_URL: string }) {
   const theme = useRecoilValue(themeState);
 
 
@@ -16,16 +16,16 @@ export default function Compose({ VERCEL_URL }: { VERCEL_URL: string }) {
       <Head>
         <title>Compose</title>
       </Head>
-      <ComposeComponent VERCEL_URL={VERCEL_URL} />
+      <ComposeComponent DEPLOYED_URL={DEPLOYED_URL} />
     </ThemeProvider>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const VERCEL_URL: string = String(process.env.VERCEL_URL);
+  const DEPLOYED_URL: string = String(process.env.DEPLOYED_URL);
   return {
     props: {
-      VERCEL_URL,
+      DEPLOYED_URL,
     }
   };
 }

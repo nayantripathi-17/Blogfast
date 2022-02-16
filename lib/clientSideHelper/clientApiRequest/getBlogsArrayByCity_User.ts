@@ -1,9 +1,9 @@
 import urljoin from "url-join";
 import { BlogPartial } from "../../../types";
 
-const getBlogsArrayByCity = async (city: string, VERCEL_URL: string): Promise<BlogPartial[]> => {
+const getBlogsArrayByCity = async (city: string, DEPLOYED_URL: string): Promise<BlogPartial[]> => {
     try {
-        const url = urljoin(VERCEL_URL, `api`, `requestBlogsByCity`, `?city=${city}`);
+        const url = urljoin(DEPLOYED_URL, `api`, `requestBlogsByCity`, `?city=${city}`);
         const response = await fetch(url, {
             method: "GET",
         });

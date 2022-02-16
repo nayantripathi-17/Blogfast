@@ -4,7 +4,7 @@ import debounce from "lodash/debounce";
 import TextField from "@mui/material/TextField";
 import { AutocompleteCitiesProps } from "../types";
 
-export default function AutocompleteCities({ VERCEL_URL, cityValue: setCityValue }: AutocompleteCitiesProps) {
+export default function AutocompleteCities({ DEPLOYED_URL, cityValue: setCityValue }: AutocompleteCitiesProps) {
   const [value, setValue] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [citySearchList, setCitySearchList] = useState([]);
@@ -28,12 +28,12 @@ export default function AutocompleteCities({ VERCEL_URL, cityValue: setCityValue
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSearchCities = useCallback(
-    debounce(async (search: string, VERCEL_URL: string, csrfToken: string) => {
+    debounce(async (search: string, DEPLOYED_URL: string, csrfToken: string) => {
       if (csrfToken === "") {
         setCsrfToken(String((await (await import("next-auth/react")).getCsrfToken())));
       }
       const citiesListRender = (await import("../lib/clientSideHelper/clientApiRequest/citiesListRender_User")).default
-      const cityList = await citiesListRender(search, VERCEL_URL, csrfToken);
+      const cityList = await citiesListRender(search, DEPLOYED_URL, csrfToken);
       setCitySearchList(cityList);
       setIsLoading(false);
     }, 1000),
@@ -43,9 +43,9 @@ export default function AutocompleteCities({ VERCEL_URL, cityValue: setCityValue
   useEffect(() => {
     if (inputValue !== "" && value !== inputValue) {
       setIsLoading(true);
-      debouncedSearchCities(inputValue, VERCEL_URL, csrfToken);
+      debouncedSearchCities(inputValue, DEPLOYED_URL, csrfToken);
     }
-  }, [inputValue, debouncedSearchCities, VERCEL_URL, csrfToken, value]);
+  }, [inputValue, debouncedSearchCities, DEPLOYED_URL, csrfToken, value]);
   try {
     return (
       <section className="flex flex-grow justify-center">

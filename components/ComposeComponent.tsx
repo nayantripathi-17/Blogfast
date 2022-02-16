@@ -26,7 +26,7 @@ const DynamicTextfieldContent = dynamic(() => import("./TextfieldContent"), {
 
 
 //Component
-function ComposeComponent({ VERCEL_URL }: MainProps) {
+function ComposeComponent({ DEPLOYED_URL }: MainProps) {
   //Use Session Hook
   const { data: session } = useSession();
   const router = useRouter();
@@ -90,7 +90,7 @@ function ComposeComponent({ VERCEL_URL }: MainProps) {
       const postBlog = (await import("../lib/clientSideHelper/clientApiRequest/postBlog_User")).default;
       const formData = new FormData(event.target as HTMLFormElement);
       formData.append('city', cityValue);
-      const blogId = await postBlog(formData, VERCEL_URL);
+      const blogId = await postBlog(formData, DEPLOYED_URL);
       if (blogId === "") {
         setIsSubmitted(false);
         setIsLoading(false);
@@ -125,7 +125,7 @@ function ComposeComponent({ VERCEL_URL }: MainProps) {
 
         {isAutocompleteVisible && (
           <DynamicAutocompleteCities
-            VERCEL_URL={VERCEL_URL}
+            DEPLOYED_URL={DEPLOYED_URL}
             cityValue={setCityValue}
           />
         )}

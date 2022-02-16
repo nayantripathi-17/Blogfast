@@ -1,7 +1,7 @@
 import urljoin from "url-join";
 
-export const getCities = async (VERCEL_URL: string): Promise<string[]> => {
-  const url = urljoin(VERCEL_URL, `api`, `getCitiesAPI`);
+export const getCities = async (DEPLOYED_URL: string): Promise<string[]> => {
+  const url = urljoin(DEPLOYED_URL, `api`, `getCitiesAPI`);
   try {
     const response = await fetch(url, { method: "GET" });
     if (response.status !== 200) {

@@ -8,7 +8,7 @@ import HomeComponent from "../components/HomeComponent";
 import { MainProps } from "../types";
 
 
-export default function Home({ VERCEL_URL }: MainProps) {
+export default function Home({ DEPLOYED_URL }: MainProps) {
   const theme = useRecoilValue(themeState);
 
   return (
@@ -17,7 +17,7 @@ export default function Home({ VERCEL_URL }: MainProps) {
       <Head>
         <title>Blog Fast</title>
       </Head>
-      <HomeComponent VERCEL_URL={VERCEL_URL} />
+      <HomeComponent DEPLOYED_URL={DEPLOYED_URL} />
     </ThemeProvider>
   );
 }
@@ -25,7 +25,7 @@ export default function Home({ VERCEL_URL }: MainProps) {
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      VERCEL_URL: process.env.VERCEL_URL,
+      DEPLOYED_URL: process.env.DEPLOYED_URL,
     },
   };
 }

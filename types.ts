@@ -9,7 +9,7 @@ import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 /* React Components */
 //All Main Components
 export declare interface MainProps {
-    VERCEL_URL: string,
+    DEPLOYED_URL: string,
 }
 export type ServerSession = (Session & { user: UserObject }) | null
 
