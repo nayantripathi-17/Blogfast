@@ -10,7 +10,7 @@ export default async function requestBlog(req: NextApiRequest, res: NextApiRespo
 
     try {
       //Undefined Check
-      if (city === undefined || city === "" || Array.isArray(city)) {
+      if (!(city !== undefined && !Array.isArray(city) && city.trim() === "")) {
         res.status(400).send({
           error: `URL parameter city=<NonEmptyString>`,
         });

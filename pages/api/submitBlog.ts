@@ -36,7 +36,7 @@ export default async function submitBlog(req: SubmitBlogExtendedNextApiRequest, 
         const admins = await getDocs(collection(db, "admin"));
         if (admins.empty) return false;
         for (const admin of admins.docs) {
-          if (admin.id === subId) {
+          if (admin.id.trim() === subId.trim()) {
             return true
           }
         }

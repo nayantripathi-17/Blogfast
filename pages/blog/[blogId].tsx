@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
       };
     }
     const { blogId } = params;
-    if (blogId === undefined || blogId === "" || Array.isArray(blogId)) {
+    if (!(blogId !== undefined && !Array.isArray(blogId) && blogId.trim() === "")) {
       return {
         notFound: true,
         props: {

@@ -91,7 +91,7 @@ function ComposeComponent({ DEPLOYED_URL }: MainProps) {
       const formData = new FormData(event.target as HTMLFormElement);
       formData.append('city', cityValue);
       const blogId = await postBlog(formData, DEPLOYED_URL);
-      if (blogId === "") {
+      if (blogId.trim() === "") {
         setIsSubmitted(false);
         setIsLoading(false);
         return;
