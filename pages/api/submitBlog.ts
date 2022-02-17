@@ -45,7 +45,7 @@ export default async function submitBlog(req: SubmitBlogExtendedNextApiRequest, 
 
       if (
         !(
-          req.cookies["next-auth.csrf-token"] &&
+          req.cookies["__Host-next-auth.csrf-token"] &&
           session !== null &&
           subId !== undefined &&
           (await isAdmin(subId))
@@ -86,7 +86,7 @@ export default async function submitBlog(req: SubmitBlogExtendedNextApiRequest, 
 
       const csrfVerifyOptions: VerifyCsrfOptions = {
         options: { secret: String(JWT_SECRET) },
-        cookieValue: req.cookies["next-auth.csrf-token"],
+        cookieValue: req.cookies["__Host-next-auth.csrf-token"],
         isPost: true,
         bodyValue: req.body.csrfToken,
       };

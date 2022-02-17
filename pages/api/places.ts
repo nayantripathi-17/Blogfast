@@ -4,7 +4,9 @@ import {
 } from "@googlemaps/google-maps-services-js";
 import isEmpty from "lodash/isEmpty";
 import { NextApiRequest, NextApiResponse } from "next";
+import { getSession } from "next-auth/react";
 import { verifyCsrf } from "../../lib/verifyCsrf";
+import { ServerSession } from "../../types";
 
 export default async function places(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   const { API_KEY_GOOGLE_MAPS, JWT_SECRET } = process.env as { [key: string]: string };
@@ -34,12 +36,13 @@ export default async function places(req: NextApiRequest, res: NextApiResponse):
         return resolve();
       }
 
+      const session = await getSession({ req }) as ServerSession;
       if (
         !(
-          req.cookies["next-auth.csrf-token"] &&
-          req.cookies["next-auth.session-token"]
+          req.cookies["__Host-next-auth.csrf-token"] &&
+          session !== null
         )
-      ) {
+      ) {        
         res.status(401).send({
           error: `Use valid credentials for this endpoint`,
         });
@@ -72,7 +75,7 @@ export default async function places(req: NextApiRequest, res: NextApiResponse):
 
       const csrfVerifyOptions = {
         options: { secret: JWT_SECRET },
-        cookieValue: req.cookies["next-auth.csrf-token"],
+        cookieValue: req.cookies["__Host-next-auth.csrf-token"],
         isPost: true,
         bodyValue: req.body.csrfToken,
       };

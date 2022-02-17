@@ -3,16 +3,16 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 module.exports = withBundleAnalyzer({});
-
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval';
+  script-src 'self';
   style-src 'self' 'unsafe-inline';
   child-src 'self';
   font-src 'self';
   img-src 'self' upload.wikimedia.org lh3.googleusercontent.com;
   connect-src 'self' vitals.vercel-insights.com;
-  form-action 'self';  
+  form-action 'self';
+  object-src 'none';
 `;
 
 const securityHeaders = [
