@@ -1,6 +1,6 @@
 # Blogfast
-This is a Blogging Website, where you can tag your blogs with a city. Share interesting stories...
-It currently supports logging with google. All blogs can be viewed without logging in.
+A Blogging Website, where user can tag blogs with a city. Share interesting stories...
+Uses Google Account for login purposes to increase security. Support for content viewing in logged out state. 
 
 ## Link
 #### https://blogfast.vercel.app/
